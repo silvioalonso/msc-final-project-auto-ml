@@ -1,3 +1,4 @@
+# Dto to pass input parameters set by the user
 class InputParametersDto:
     def __init__(
         self, 

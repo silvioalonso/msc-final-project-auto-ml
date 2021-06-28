@@ -1,7 +1,9 @@
+# importing streamlit to handle web pages
 import streamlit as st
 
-def create_layout():
-    #---------------------------------#
+
+# creates header in main panel
+def create_header():
     st.write("""
     # The Machine Learning Hyperparameter Optimization App
     **(Regression Edition)**
@@ -10,5 +12,4 @@ def create_layout():
 
     """)
 
-    # Displays the dataset
     st.subheader('Dataset')

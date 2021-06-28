@@ -1,6 +1,12 @@
+# importing streamlit to handle web pages
 import streamlit as st
+
+# importing input parameters of type InputParametersDto
 from dto.input_parameters import InputParametersDto
 
+# function that creates sidebar component and return parameters set by user
+# Return
+#   InputParametersDto
 def create_input_parameters() -> InputParametersDto:
     # Sidebar - Specify parameter settings
     st.sidebar.header('Set Parameters')
@@ -9,8 +15,10 @@ def create_input_parameters() -> InputParametersDto:
     st.sidebar.subheader('Learning Parameters')
     parameter_n_estimators = st.sidebar.slider('Number of estimators (n_estimators)', 0, 500, (10,50), 50)
     parameter_n_estimators_step = st.sidebar.number_input('Step size for n_estimators', 10)
+    
     st.sidebar.write('---')
     parameter_max_features = st.sidebar.slider('Max features (max_features)', 1, 50, (1,3), 1)
+    
     st.sidebar.number_input('Step size for max_features', 1)
     st.sidebar.write('---')
     parameter_min_samples_split = st.sidebar.slider('Minimum number of samples required to split an internal node (min_samples_split)', 1, 10, 2, 1)

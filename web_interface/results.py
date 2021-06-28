@@ -1,13 +1,24 @@
+# importing streamlit to handle web pages
 import streamlit as st
+
+# importing Dto of results obtained by ml model
 from dto.results_data import ResultsDataDto
+
+# importing function that plots chart
 from web_interface.results_chart import plot
+
+# importing csv download function
 from util.csv import csv_download
 
+# function that presents initial results
 def create_initial_results(df_head, y_name: str):
 	st.write(df_head)
 	st.markdown('A model is being built to predict the following **Y** variable:')
 	st.info(y_name)
 
+# function that present full results to user
+# Parameters:
+# 	ResultsDataDto with results obtained by model
 def create_results(results_data: ResultsDataDto):
 	
 	st.subheader('Model Performance')

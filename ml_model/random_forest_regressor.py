@@ -1,26 +1,32 @@
+# importing packages to handle math analysis
 import pandas as pd
-
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import GridSearchCV
-import numpy as np
 
+# importing Dto used as function return
 from dto.results_data import ResultsDataDto
 
 
-def build_model(df, inp):
+
+# function that handles the predictive analysis using Random Forest Regression algorithm
+# Parameters:
+#	df - dataset
+# 	inp - input parameters of type InputParametersDto set by user
+# Return:
+# 	ResultsDataDto - results obtained by model
+def build_model(df, inp) -> ResultsDataDto:
 	n_estimators_range = np.arange(inp.parameter_n_estimators[0], inp.parameter_n_estimators[1]+inp.parameter_n_estimators_step, inp.parameter_n_estimators_step)
 	max_features_range = np.arange(inp.parameter_max_features[0], inp.parameter_max_features[1]+1, 1)
 	param_grid = dict(max_features=max_features_range, n_estimators=n_estimators_range)
 
-	X = df.iloc[:,:-1] # Using all column except for the last column as X
-	Y = df.iloc[:,-1] # Selecting the last column as Y
+	X = df.iloc[:,:-1] # using all column except for the last column as X
+	Y = df.iloc[:,-1] # selecting the last column as Y
 
-	# Data splitting
+	# data splitting
 	X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=inp.split_size)
-	#X_train.shape, Y_train.shape
-	#X_test.shape, Y_test.shape
 
 	rf = RandomForestRegressor(
 		n_estimators=inp.parameter_n_estimators,
@@ -41,12 +47,12 @@ def build_model(df, inp):
 
 	mean_error = mean_squared_error(Y_test, Y_pred_test)
 
-	#-----Process grid data-----#
+	# process grid data
 	grid_results = pd.concat([pd.DataFrame(grid.cv_results_["params"]),pd.DataFrame(grid.cv_results_["mean_test_score"], columns=["R2"])],axis=1)
 
-	# Segment data into groups based on the 2 hyperparameters
+	# segment data into groups based on the 2 hyperparameters
 	grid_contour = grid_results.groupby(['max_features','n_estimators']).mean()
-	# Pivoting the data
+	# pivoting the data
 	grid_reset = grid_contour.reset_index()
 	grid_reset.columns = ['max_features', 'n_estimators', 'R2']
 	grid_pivot = grid_reset.pivot('max_features', 'n_estimators')

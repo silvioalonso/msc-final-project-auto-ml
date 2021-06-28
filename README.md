@@ -1,16 +1,4 @@
-# ml-opt-app
-
-# Watch the tutorial video
-
-Machine Learning Hyperparameter Optimizer App (Streamlit + Scikit-learn + Python)
-
-<a href="https://youtu.be/HT2WHLgYpxY"><img src="http://img.youtube.com/vi/HT2WHLgYpxY/0.jpg" alt="How to Build a ML Hyperparameter Optimization App (Streamlit + Scikit-learn + Python)" title="How to Build a ML Hyperparameter Optimization App (Streamlit + Scikit-learn + Python)" width="400" /></a>
-
-# Demo
-
-Launch the web app:
-
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/dataprofessor/ml-opt-app/main/ml-opt-app.py)
+# Sistema de Auto ML
 
 # Reproducing this web app
 To recreate this web app on your own computer, do the following.

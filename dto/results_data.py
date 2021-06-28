@@ -1,3 +1,4 @@
+# Dto to pass results obtained by ml model
 class ResultsDataDto:
 	def __init__(
 		self, 
